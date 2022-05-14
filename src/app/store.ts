@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 import { appReducer } from './app-reducer'
 import {authReducer} from "../features/Login/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
+import logger from "redux-logger";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
@@ -21,7 +22,7 @@ const rootReducer = combineReducers({
 export const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().prepend(thunkMiddleware)
+        getDefaultMiddleware().prepend(thunkMiddleware).concat(logger)
 })
 
 // определить автоматически тип всего объекта состояния
