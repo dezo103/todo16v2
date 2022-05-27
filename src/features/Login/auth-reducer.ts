@@ -20,7 +20,7 @@ const slice = createSlice({
 })
 
 export const authReducer = slice.reducer
-export const {setIsLoggedInAC} = slice.actions
+export const {setIsLoggedInAC} = slice.actions  // the same const setIsLoggedInAC = slice.action.setIsLoggedInAC
 
 // export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 //     switch (action.type) {

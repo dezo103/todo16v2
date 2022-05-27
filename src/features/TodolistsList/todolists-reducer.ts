@@ -4,6 +4,8 @@ import {RequestStatusType, setAppStatusAC, SetAppStatusActionType} from '../../a
 
 const initialState: Array<TodolistDomainType> = []
 
+
+
 export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionsType): Array<TodolistDomainType> => {
     switch (action.type) {
         case 'REMOVE-TODOLIST':

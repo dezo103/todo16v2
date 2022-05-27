@@ -51,7 +51,6 @@ export type InitialStateType = {
 }
 
 // export const setIsInitializedAC = (isInitialized: boolean) => ({type: 'APP/SET-INITIALIZED', isInitialized} as const)
-//
 // export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
 // export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
 
