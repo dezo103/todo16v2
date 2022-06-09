@@ -19,7 +19,7 @@ const slice = createSlice({
     reducers: {
         removeTaskAC(state, action: PayloadAction<{ taskId: string, todolistId: string }>) {
             const tasks = state[action.payload.todolistId]
-            const index = tasks.findIndex(t => t.id !== action.payload.taskId)
+            const index = tasks.findIndex(t => t.id == action.payload.taskId)
             if (index > -1) {
                 tasks.splice(index, 1)
             }
@@ -30,7 +30,7 @@ const slice = createSlice({
         },
         updateTaskAC(state, action: PayloadAction<{ taskId: string, model: UpdateDomainTaskModelType, todolistId: string }>) {
             const tasks = state[action.payload.todolistId]
-            const index = tasks.findIndex(t => t.id !== action.payload.taskId)
+            const index = tasks.findIndex(t => t.id == action.payload.taskId)
             if (index > -1) {
                 tasks[index] = {...tasks[index], ...action.payload.model}
             }

@@ -29,7 +29,6 @@ const slice = createSlice({
         changeTodolistEntityStatusAC(state, action: PayloadAction<{id: string, status: RequestStatusType}>){
             const index = state.findIndex(tl => tl.id === action.payload.id)
             if (index > -1) {
-                state.splice(index, 1)
                 state[index].entityStatus = action.payload.status
             }
         },
