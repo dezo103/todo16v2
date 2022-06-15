@@ -62,7 +62,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     }, [])
 
     const removeTodolist = useCallback(function (id: string) {
-        const thunk = removeTodolistTC(id)
+        const thunk = removeTodolistTC({todolistId: id})
         dispatch(thunk)
     }, [])
 
