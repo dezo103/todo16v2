@@ -3,7 +3,7 @@ import './App.css'
 import {TodolistsList} from '../features/TodolistsList/TodolistsList'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from './store'
-import {initializeAppTC, RequestStatusType, setIsInitializedAC} from './app-reducer'
+import {initializeAppTC, RequestStatusType} from './app-reducer'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
