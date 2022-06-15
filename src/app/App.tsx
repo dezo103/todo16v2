@@ -17,15 +17,19 @@ import {Login} from "../features/Login/Login";
 import {Navigate, Route, Routes} from 'react-router-dom'
 import CircularProgress from "@mui/material/CircularProgress";
 import {logoutTC} from "../features/Login/auth-reducer";
+import {selectIsInitialized, selectStatus} from "./selectors";
 
 type PropsType = {
     demo?: boolean
 }
 
+
+const selectIsLoggedIn = (state: AppRootStateType) => state.auth.isLoggedIn
+
 function App({demo = false}: PropsType) {
-    const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
-    const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+    const status = useSelector(selectStatus)
+    const isInitialized = useSelector(selectIsInitialized)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
 
     const dispatch = useDispatch()
 
