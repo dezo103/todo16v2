@@ -1,7 +1,11 @@
 import {
-    addTodolistAC, changeTodolistEntityStatusAC,
+    addTodolistTC,
+    changeTodolistEntityStatusAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC, fetchTodolistsTC, FilterValuesType, removeTodolistTC,
+    changeTodolistTitleTC,
+    fetchTodolistsTC,
+    FilterValuesType,
+    removeTodolistTC,
     TodolistDomainType,
     todolistsReducer
 } from './todolists-reducer'
@@ -38,7 +42,7 @@ test('correct todolist should be added', () => {
     }
 
 
-    const endState = todolistsReducer(startState, addTodolistAC({todolist: todolist}))
+    const endState = todolistsReducer(startState, addTodolistTC.fulfilled({todolist: todolist}, 'requestId', {title: todolist.title}))
 
     expect(endState.length).toBe(3)
     expect(endState[0].title).toBe(todolist.title)
@@ -48,7 +52,7 @@ test('correct todolist should be added', () => {
 test('correct todolist should change its name', () => {
     let newTodolistTitle = 'New Todolist'
 
-    const action = changeTodolistTitleAC({id: todolistId2, title: newTodolistTitle})
+    const action = changeTodolistTitleTC.fulfilled({id: todolistId2, title: newTodolistTitle}, 'requestId', {id: todolistId2, title: newTodolistTitle})
 
     const endState = todolistsReducer(startState, action)
 
