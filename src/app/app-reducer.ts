@@ -19,9 +19,6 @@ const slice = createSlice({
         isInitialized: false
     } as InitialStateType,
     reducers: {
-        // setIsInitializedAC(state, action: PayloadAction<{ isInitialized: boolean }>) {
-        //     state.isInitialized = action.payload.isInitialized
-        // },
         setAppErrorAC(state, action: PayloadAction<{ error: string | null }>) {
             state.error = action.payload.error
         },
