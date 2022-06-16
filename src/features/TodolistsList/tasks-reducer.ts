@@ -60,8 +60,8 @@ export const updateTaskTC = createAsyncThunk('task/updateTask',
             ...param.model
         }
 
-        const res = await todolistsAPI.updateTask(param.todolistId, param.taskId, apiModel)
         try {
+            const res = await todolistsAPI.updateTask(param.todolistId, param.taskId, apiModel)
             if (res.data.resultCode === 0) {
                 return param
             } else {
