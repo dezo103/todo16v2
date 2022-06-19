@@ -13,18 +13,17 @@ import Container from '@mui/material/Container';
 import LinearProgress from '@mui/material/LinearProgress';
 import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
-import {Login} from "../features/Login/Login";
+import {Login} from "../features/Auth/Login";
 import {Navigate, Route, Routes} from 'react-router-dom'
 import CircularProgress from "@mui/material/CircularProgress";
-import {logoutTC} from "../features/Login/auth-reducer";
+import {logoutTC} from "../features/Auth/auth-reducer";
 import {selectIsInitialized, selectStatus} from "./selectors";
+import {selectIsLoggedIn} from "../features/Auth/selectors";
 
 type PropsType = {
     demo?: boolean
 }
 
-
-const selectIsLoggedIn = (state: AppRootStateType) => state.auth.isLoggedIn
 
 function App({demo = false}: PropsType) {
     const status = useSelector(selectStatus)
