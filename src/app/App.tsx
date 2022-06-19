@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import './App.css'
-import {TodolistsList} from '../features/TodolistsList/TodolistsList'
+import {TodolistsList} from '../features/TodolistsList/'
 import {useDispatch, useSelector} from 'react-redux'
 import {initializeAppTC} from './app-reducer'
 import AppBar from '@mui/material/AppBar';
@@ -61,7 +61,7 @@ function App({demo = false}: PropsType) {
                 </Toolbar>
                 {status === 'loading' && <LinearProgress/>}
             </AppBar>
-            <Container fixed>
+            <Container fixed style={{maxWidth: '100%'}}>
                 <Routes>
                     <Route path="/" element={<TodolistsList demo={demo}/>}/>
                     <Route path="login" element={<Login/>}/>

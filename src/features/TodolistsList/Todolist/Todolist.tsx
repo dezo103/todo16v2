@@ -8,8 +8,8 @@ import { Task } from './Task/Task'
 import { TaskStatuses, TaskType } from '../../../api/todolists-api'
 import { FilterValuesType, TodolistDomainType } from '../todolists-reducer'
 import { useDispatch } from 'react-redux'
-//import { fetchTasksTC } from '../tasks-reducer'
 import {taskActions} from "../index";
+import {Paper} from "@mui/material";
 
 type PropsType = {
     todolist: TodolistDomainType
@@ -61,11 +61,13 @@ export const Todolist = React.memo(function ({demo = false, ...props}: PropsType
         tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.Completed)
     }
 
-    return <div>
-        <h3><EditableSpan value={props.todolist.title} onChange={changeTodolistTitle}/>
-            <IconButton onClick={removeTodolist} disabled={props.todolist.entityStatus === 'loading'}>
-                <Delete/>
-            </IconButton>
+    return <Paper style={{ position: 'relative', padding: '10px'}}>
+        <IconButton onClick={removeTodolist} disabled={props.todolist.entityStatus === 'loading'}
+        style={{ position: 'absolute', right: '5px', top: '5px' }}>
+            <Delete/>
+        </IconButton>
+        <h3>
+            <EditableSpan value={props.todolist.title} onChange={changeTodolistTitle}/>
         </h3>
         <AddItemForm addItem={addTask} disabled={props.todolist.entityStatus === 'loading'}/>
         <div>
@@ -76,6 +78,7 @@ export const Todolist = React.memo(function ({demo = false, ...props}: PropsType
                                                 changeTaskStatus={props.changeTaskStatus}
                 />)
             }
+            { !tasksForTodolist.length && <div style={{color: 'gray', padding: '8px 0'}}>No task</div> }
         </div>
         <div style={{paddingTop: '10px'}}>
             <Button variant={props.todolist.filter === 'all' ? 'outlined' : 'text'}
@@ -92,7 +95,7 @@ export const Todolist = React.memo(function ({demo = false, ...props}: PropsType
                     color={'secondary'}>Completed
             </Button>
         </div>
-    </div>
+    </Paper>
 })
 
 

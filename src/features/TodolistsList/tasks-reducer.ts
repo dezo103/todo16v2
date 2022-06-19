@@ -1,7 +1,3 @@
-//import {addTodolistTC,
-// changeTodolistTitleTC,
-// fetchTodolistsTC,
-// removeTodolistTC} from './todolists-reducer'
 import {todolistActions} from './'
 import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from '../../api/todolists-api'
 import {AppRootStateType} from '../../app/store'

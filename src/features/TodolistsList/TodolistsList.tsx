@@ -1,26 +1,16 @@
 import React, {useCallback, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from '../../app/store'
-import {
-    //addTodolistTC,
-    changeTodolistFilterAC,
-    //changeTodolistTitleTC,
-    //fetchTodolistsTC,
-    FilterValuesType,
-    //removeTodolistTC,
-    TodolistDomainType
-} from './todolists-reducer'
+import {changeTodolistFilterAC, FilterValuesType, TodolistDomainType} from './todolists-reducer'
 //import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from './tasks-reducer'
 import {TasksStateType} from './tasks-reducer'
 import {TaskStatuses} from '../../api/todolists-api'
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import {AddItemForm} from '../../components/AddItemForm/AddItemForm'
 import {Todolist} from './Todolist/Todolist'
 import {Navigate} from "react-router-dom";
 import {selectIsLoggedIn} from "../Auth/selectors";
-import {taskActions} from "./";
-import {todolistActions} from "./";
+import {taskActions, todolistActions} from "./";
 
 type PropsType = {
     demo?: boolean
@@ -80,7 +70,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         dispatch(thunk)
     }, [dispatch])
 
-    if(!isLoggedIn) {
+    if (!isLoggedIn) {
         return <Navigate to={"login"}/>
     }
 
@@ -89,13 +79,13 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         <Grid container style={{padding: '20px'}}>
             <AddItemForm addItem={addTodolist}/>
         </Grid>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} style={{flexWrap: 'nowrap', overflowX: "scroll"}}>
             {
                 todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id]
 
-                    return <Grid item key={tl.id}>
-                        <Paper style={{padding: '10px'}}>
+                    return <Grid item key={tl.id} >
+                        <div style={{width: '300px'}}>
                             <Todolist
                                 todolist={tl}
                                 tasks={allTodolistTasks}
@@ -108,7 +98,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
                                 changeTodolistTitle={changeTodolistTitle}
                                 demo={demo}
                             />
-                        </Paper>
+                        </div>
                     </Grid>
                 })
             }
