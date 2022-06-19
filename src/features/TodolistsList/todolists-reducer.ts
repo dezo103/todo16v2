@@ -7,7 +7,8 @@ import {AxiosError} from "axios";
 
 
 // thunks
-export const fetchTodolistsTC = createAsyncThunk('todolists/fetchTodolists', async (param, {dispatch, rejectWithValue}) => {
+
+const fetchTodolistsTC = createAsyncThunk('todolists/fetchTodolists', async (param, {dispatch, rejectWithValue}) => {
     dispatch(setAppStatusAC({status: 'loading'}))
     try {
         const res = await todolistsAPI.getTodolists()
@@ -20,7 +21,7 @@ export const fetchTodolistsTC = createAsyncThunk('todolists/fetchTodolists', asy
     }
 })
 
-export const removeTodolistTC = createAsyncThunk('todolists/removeTodolists', async (param: {todolistId: string}, {dispatch, rejectWithValue}) => {
+const removeTodolistTC = createAsyncThunk('todolists/removeTodolists', async (param: {todolistId: string}, {dispatch, rejectWithValue}) => {
     dispatch(setAppStatusAC({status: 'loading'}))
     dispatch(changeTodolistEntityStatusAC({id: param.todolistId, status: 'loading'} ))
     try {
@@ -34,17 +35,24 @@ export const removeTodolistTC = createAsyncThunk('todolists/removeTodolists', as
     }
 })
 
-export const addTodolistTC = createAsyncThunk('todolists/addTodolists', async (param: {title: string}, {dispatch}) => {
+const addTodolistTC = createAsyncThunk('todolists/addTodolists', async (param: {title: string}, {dispatch}) => {
     dispatch(setAppStatusAC({status: 'loading'}))
     const res = await todolistsAPI.createTodolist(param.title)
     dispatch(setAppStatusAC({status: 'succeeded'}))
     return {todolist: res.data.data.item}
 })
 
-export const changeTodolistTitleTC = createAsyncThunk('todolists/changeTodolistTitle', async (param: {id: string, title: string}, {dispatch}) => {
+const changeTodolistTitleTC = createAsyncThunk('todolists/changeTodolistTitle', async (param: {id: string, title: string}, {dispatch}) => {
     await todolistsAPI.updateTodolist(param.id, param.title)
     return {id: param.id, title: param.title}
 })
+
+export const asyncActions = {
+    fetchTodolistsTC,
+    removeTodolistTC,
+    addTodolistTC,
+    changeTodolistTitleTC
+}
 
 const slice = createSlice({
     name: "todolists",

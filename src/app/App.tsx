@@ -2,8 +2,7 @@ import React, {useEffect} from 'react'
 import './App.css'
 import {TodolistsList} from '../features/TodolistsList/TodolistsList'
 import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from './store'
-import {initializeAppTC, RequestStatusType} from './app-reducer'
+import {initializeAppTC} from './app-reducer'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -17,8 +16,8 @@ import {Login} from "../features/Auth/Login";
 import {Navigate, Route, Routes} from 'react-router-dom'
 import CircularProgress from "@mui/material/CircularProgress";
 import {logoutTC} from "../features/Auth/auth-reducer";
-import {selectIsInitialized, selectStatus} from "./selectors";
-import {selectIsLoggedIn} from "../features/Auth/selectors";
+import {authSelectors} from "../features/Auth";
+import {appSelectors} from "./index";
 
 type PropsType = {
     demo?: boolean
@@ -26,9 +25,9 @@ type PropsType = {
 
 
 function App({demo = false}: PropsType) {
-    const status = useSelector(selectStatus)
-    const isInitialized = useSelector(selectIsInitialized)
-    const isLoggedIn = useSelector(selectIsLoggedIn)
+    const status = useSelector(appSelectors.selectStatus)
+    const isInitialized = useSelector(appSelectors.selectIsInitialized)
+    const isLoggedIn = useSelector(authSelectors.selectIsLoggedIn)
 
     const dispatch = useDispatch()
 

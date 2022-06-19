@@ -10,9 +10,9 @@ import Button from '@mui/material/Button';
 import {FormikHelpers, useFormik} from "formik";
 import {loginTC} from "./auth-reducer";
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "../../app/store";
+import {useAppDispatch} from "../../app/store";
 import {Navigate} from 'react-router-dom'
-import {selectIsLoggedIn} from "./selectors";
+import {authSelectors} from "./index";
 
 type FormValuesType = {
     email: string
@@ -29,7 +29,7 @@ type FormikErrorType = {
 
 export const Login = () => {
 
-    const isLoggedIn = useSelector(selectIsLoggedIn)
+    const isLoggedIn = useSelector(authSelectors.selectIsLoggedIn)
 
     const dispatch = useAppDispatch()
 
