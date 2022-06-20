@@ -45,8 +45,6 @@ const updateTaskTC = createAsyncThunk('task/updateTask',
         const state = thunkAPI.getState() as AppRootStateType
         const task = state.tasks[param.todolistId].find(t => t.id === param.taskId)
         if (!task) {
-            //throw new Error("task not found in the state");
-            //console.warn('task not found in the state')
             return thunkAPI.rejectWithValue('task not found in the state')
         }
 
@@ -86,38 +84,39 @@ const slice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(todolistActions.addTodolistTC.fulfilled, (state, action) => {
-            state[action.payload.todolist.id] = []
-        })
-        builder.addCase(todolistActions.removeTodolistTC.fulfilled, (state, action) => {
-            delete state[action.payload.id]
-        })
-        builder.addCase(todolistActions.fetchTodolistsTC.fulfilled, (state, action) => {
-            action.payload.todolists.forEach((tl: any) => {
-                state[tl.id] = []
+    extraReducers: builder => {
+        builder
+            .addCase(todolistActions.addTodolistTC.fulfilled, (state, action) => {
+                state[action.payload.todolist.id] = []
             })
-        })
-        builder.addCase(fetchTasksTC.fulfilled, (state, action) => {
-            state[action.payload.todolistId] = action.payload.tasks
-        })
-        builder.addCase(removeTaskTC.fulfilled, (state, action) => {
-            const tasks = state[action.payload.todolistId]
-            const index = tasks.findIndex(t => t.id == action.payload.taskId)
-            if (index > -1) {
-                tasks.splice(index, 1)
-            }
-        })
-        builder.addCase(addTaskTC.fulfilled, (state, action) => {
-            state[action.payload.todoListId].unshift(action.payload)
-        })
-        builder.addCase(updateTaskTC.fulfilled, (state, action) => {
-            const tasks = state[action.payload.todolistId]
-            const index = tasks.findIndex(t => t.id == action.payload.taskId)
-            if (index > -1) {
-                tasks[index] = {...tasks[index], ...action.payload.model}
-            }
-        })
+            .addCase(todolistActions.removeTodolistTC.fulfilled, (state, action) => {
+                delete state[action.payload.id]
+            })
+            .addCase(todolistActions.fetchTodolistsTC.fulfilled, (state, action) => {
+                action.payload.todolists.forEach((tl: any) => {
+                    state[tl.id] = []
+                })
+            })
+            .addCase(fetchTasksTC.fulfilled, (state, action) => {
+                state[action.payload.todolistId] = action.payload.tasks
+            })
+            .addCase(removeTaskTC.fulfilled, (state, action) => {
+                const tasks = state[action.payload.todolistId]
+                const index = tasks.findIndex(t => t.id == action.payload.taskId)
+                if (index > -1) {
+                    tasks.splice(index, 1)
+                }
+            })
+            .addCase(addTaskTC.fulfilled, (state, action) => {
+                state[action.payload.todoListId].unshift(action.payload)
+            })
+            .addCase(updateTaskTC.fulfilled, (state, action) => {
+                const tasks = state[action.payload.todolistId]
+                const index = tasks.findIndex(t => t.id == action.payload.taskId)
+                if (index > -1) {
+                    tasks[index] = {...tasks[index], ...action.payload.model}
+                }
+            })
     }
 })
 
@@ -142,12 +141,3 @@ export type UpdateDomainTaskModelType = {
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-// type ActionsType =
-//     | ReturnType<typeof removeTaskAC>
-//     | ReturnType<typeof addTaskAC>
-//     | ReturnType<typeof updateTaskAC>
-//     | AddTodolistActionType
-//     | RemoveTodolistActionType
-//     | SetTodolistsActionType
-//     | ReturnType<typeof setTasksAC>
-// type ThunkDispatch = Dispatch<ActionsType | SetAppStatusActionType | SetAppErrorActionType>

@@ -7,7 +7,7 @@ const todolistActions = {
 }
 
 const taskActions = {
-    ...taskAsyncActions
+    ...taskAsyncActions,
 }
 
 export {
