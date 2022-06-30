@@ -1,7 +1,7 @@
 {
   "name": "todo16v2",
   "version": "0.1.0",
-  "homepage": "https://dezo103.github.io/react-todo16v2",
+  "homepage": "https://dezo103.github.io/todo16v2",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.4.1",
