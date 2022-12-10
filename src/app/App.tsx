@@ -3,7 +3,7 @@ import './App.css'
 import {TodolistsList} from '../features/TodolistsList/TodolistsList'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from './store'
-import {initializeAppTC, RequestStatusType, setIsInitializedAC} from './app-reducer'
+import {RequestStatusType} from './app-reducer'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -17,6 +17,7 @@ import {Login} from "../features/Login/Login";
 import {Navigate, Route, Routes} from 'react-router-dom'
 import CircularProgress from "@mui/material/CircularProgress";
 import {logoutTC} from "../features/Login/auth-reducer";
+import {initializeApp} from "./app-sagas";
 
 type PropsType = {
     demo?: boolean
@@ -30,7 +31,7 @@ function App({demo = false}: PropsType) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(initializeAppTC())
+        dispatch(initializeApp())
     }, [])
 
     if (!isInitialized) {
