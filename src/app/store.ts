@@ -30,8 +30,8 @@ sagaMiddleware.run(rootWatcher)
 // просто собираем саги со всего приложения
 
 function* rootWatcher() {
-    yield appWatcherSaga
-    yield tasksWatcherSaga
+    yield appWatcherSaga()
+    yield tasksWatcherSaga()
 }
 
 
