@@ -6,15 +6,15 @@ import {removeTaskAC, setTasksAC} from "./tasks-reducer";
 
 export function* fetchTasksWorkerSaga(action: ReturnType<typeof fetchTasks>) {
     yield put(setAppStatusAC('loading'))
-
     const res: AxiosResponse<GetTasksResponse> = yield call(todolistsAPI.getTasks, action.todolistId)
-
     const tasks = res.data.items
     yield put(setTasksAC(tasks, action.todolistId))
     yield put(setAppStatusAC('succeeded'))
 }
 
-export const fetchTasks = (todolistId: string) => ({type: "TASKS/FETCH-TASKS", todolistId})
+export const fetchTasks = (todolistId: string) => {
+    return {type: "TASKS/FETCH-TASKS", todolistId}
+}
 
 export function* removeTaskWorkerSaga(action: ReturnType<typeof removeTask>) {
     const res: AxiosResponse<ResponseType> = yield call(todolistsAPI.deleteTask, action.taskId, action.todolistId)
@@ -24,6 +24,6 @@ export function* removeTaskWorkerSaga(action: ReturnType<typeof removeTask>) {
 export const removeTask = (taskId: string, todolistId: string) => ({type: "TASKS/REMOVE-TASK", taskId, todolistId})
 
 export function* tasksWatcherSaga() {
-    yield takeEvery('TASKS/FETCH-TASKS', fetchTasksWorkerSaga)
-    yield takeEvery('"TASKS/REMOVE-TASK"', removeTaskWorkerSaga)
+    yield takeEvery("TASKS/FETCH-TASKS", fetchTasksWorkerSaga)
+    yield takeEvery("TASKS/REMOVE-TASK", removeTaskWorkerSaga)
 }
